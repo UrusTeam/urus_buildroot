@@ -1,3 +1,6 @@
 [submodule "buildroot"]
 	path = buildroot
 	url = https://github.com/UrusTeam/buildroot.git
+[submodule "linux"]
+	path = linux
+	url = https://github.com/UrusTeam/linux.git
