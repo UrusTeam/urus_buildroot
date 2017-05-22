@@ -7,3 +7,6 @@
 [submodule "nuttx_build/nuttx"]
 	path = nuttx_build/nuttx
 	url = https://github.com/UrusTeam/nuttx_origin
+[submodule "nuttx_build/tools"]
+	path = nuttx_build/tools
+	url = https://github.com/UrusTeam/nuttx_tools_origin.git
