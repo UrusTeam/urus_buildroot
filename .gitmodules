@@ -16,3 +16,6 @@
 [submodule "u-boot"]
 	path = u-boot
 	url = https://github.com/UrusTeam/u-boot.git
+[submodule "crosstool-ng"]
+	path = crosstool-ng
+	url = https://github.com/UrusTeam/crosstool-ng.git
