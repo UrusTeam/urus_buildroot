@@ -4,15 +4,6 @@
 [submodule "linux"]
 	path = linux
 	url = https://github.com/UrusTeam/linux.git
-[submodule "nuttx_build/nuttx"]
-	path = nuttx_build/nuttx
-	url = https://github.com/UrusTeam/nuttx_origin
-[submodule "nuttx_build/tools"]
-	path = nuttx_build/tools
-	url = https://github.com/UrusTeam/nuttx_tools_origin.git
-[submodule "nuttx_build/apps"]
-	path = nuttx_build/apps
-	url = https://github.com/UrusTeam/nuttx_apps_origin.git
 [submodule "u-boot"]
 	path = u-boot
 	url = https://github.com/UrusTeam/u-boot.git
