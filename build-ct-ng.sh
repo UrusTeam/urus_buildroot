@@ -4,8 +4,8 @@ cd crosstool-ng
 
 if [ ! -e install ] ; then
     echo "building xtool"
-    ./bootstrap &>/dev/null
-    ./configure --prefix=$(pwd)/install &>/dev/null
+    ./bootstrap
+    ./configure --prefix=$(pwd)/install
     make -j2
     make install
     echo "xtool installed"

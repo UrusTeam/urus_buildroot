@@ -17,12 +17,13 @@ addons:
       - ccache
       - gcc
       - g++
+      - util-linux
 
 before_install:
-    - . setup-ci.sh
+    - ./setup-ci.sh
 
 script:
-    - cd linux && checkout master-urus-rpi2
+    - cd linux && git checkout master-urus-rpi2 && cd ..
     - ./build-ct-ng.sh i686-urus arm-urus
 
 compiler:
