@@ -19,9 +19,10 @@ addons:
       - g++
 
 before_install:
-    - source setup-ci.sh
+    - . setup-ci.sh
 
 script:
+    - cd linux && checkout master-urus-rpi2
     - ./build-ct-ng.sh i686-urus arm-urus
 
 compiler:
