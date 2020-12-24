@@ -1,0 +1,28 @@
+language: cpp
+sudo: false
+
+dist: xenial
+
+cache:
+  ccache: true
+  directories:
+    - $HOME/opt
+
+addons:
+  apt:
+    sources:
+    packages:
+      - build-essential
+      - gawk
+      - ccache
+      - gcc
+      - g++
+
+before_install:
+    - source setup-ci.sh
+
+script:
+    - ./build-ct-ng.sh i686-urus arm-urus
+
+compiler:
+  - gcc
