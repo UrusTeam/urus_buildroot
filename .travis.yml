@@ -18,6 +18,7 @@ addons:
       - gcc
       - g++
       - util-linux
+      - gperf
 
 before_install:
     - ./setup-ci.sh
