@@ -29,4 +29,4 @@ script:
     - ./build-ct-ng.sh i686-urus arm-urus
 
 compiler:
-  - gcc
+  - g++
