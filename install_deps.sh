@@ -68,7 +68,9 @@ if [ ! -d "/system/urus" ] || [ ! -e "/etc/profile.d/urusprofile.sh" ] ; then
     #fi
     #mount /system/urus
     . /etc/profile.d/urusprofile.sh
-    . ~/.profile
+    if [ -e ~/.profile ] ; then
+        . ~/.profile
+    fi
 	echo "Done"
 else
 	echo "File structure present"
