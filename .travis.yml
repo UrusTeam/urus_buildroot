@@ -21,10 +21,14 @@ addons:
       - gperf
 
 before_install:
+    - test -n $CC  && unset CC
+    - test -n $CXX && unset CXX
     - ./install_deps.sh
     - ./setup-ci.sh
 
 script:
+    - test -n $CC  && unset CC
+    - test -n $CXX && unset CXX
     - cd linux && git checkout master-urus-rpi2 && cd ..
     - ./build-ct-ng.sh i686-urus arm-urus
 
