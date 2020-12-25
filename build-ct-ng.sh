@@ -66,6 +66,12 @@ do
     ./bin/ct-ng "$cfgs"
     mv .config .configtmp
 
+if [ "x$ONCI" != "x" ] ; then
+    mv .configtmp .configtmpci
+    sed -r -e 's:(CT_LOG_ALL=).*:CT_LOG_INFO=y:;' \
+    -e 's:(CT_LOG_LEVEL_MAX=).*:CT_LOG_LEVEL_MAX="INFO":;' .configtmpci > .configtmp
+fi
+
     sed -r -e 's:^(CT_WORK_DIR)=.*:\1="\/system/urus/.build":;' \
     -e 's:\$\{CT_LIB_DIR\}.*:\$\{CT_TOP_DIR\}/../../linux\":;' \
     -e 's:(CT_KERNEL_LINUX_CUSTOM_LOCATION=).*:CT_KERNEL_LINUX_CUSTOM_LOCATION=\"\$\{CT_TOP_DIR\}/../../linux\":;' \
@@ -75,7 +81,7 @@ do
     -e 's:(CT_LOAD=).*:CT_LOAD="6":;' \
     -e 's:(#.*CT_STRIP_TARGET_TOOLCHAIN_EXECUTABLES).*:CT_STRIP_TARGET_TOOLCHAIN_EXECUTABLES=y:;' .configtmp > .config
 
-    ./bin/ct-ng build >> $MAINBUILDROOTDIR/logbuild.txt
+    ./bin/ct-ng build
     cd /system/urus/.build
     STRIP=$(find $(pwd) -executable -name "$TARGET*-strip")
     log_build "Command strip" $STRIP
@@ -90,7 +96,7 @@ do
         PUSHDTOOL=$(pwd)
         cd $toolfolder
         ls ./bin/*ct-ng.config *.log* 2>/dev/null | xargs rm -f
-        find . | xargs $STRIP -g -S -d --strip-debug --strip-unneeded >> $MAINBUILDROOTDIR/logbuild.txt
+        find . | xargs $STRIP -g -S -d --strip-debug --strip-unneeded
         echo "\ntoolchain striped $STRIP"
         printf "\ncompressing current folder $toolfolder\n"
         echo $cfgs | sed -e 's:,.*::;'
