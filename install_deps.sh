@@ -32,7 +32,7 @@ if [ `printf "$PLATOS" | grep -ri - -e "raspbian" | wc -l` -gt 0 ] ; then
 elif [ `printf "$PLATOS" | grep -ri - -e "ubuntu" | wc -l` -gt 0 ] ; then
     SCOWPWRCMD="apt-get"
     YESNOCMD="-qy"
-	BASEPKG_ALL="libssl-dev $BASEPKG"
+	BASEPKG_ALL="libssl-dev help2man $BASEPKG"
     #sudo apt-get update $YESNOCMD
     #sudo apt-get install openjdk-8-jdk $YESNOCMD
     #sudo dpkg --add-architecture i386
