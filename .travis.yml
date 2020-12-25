@@ -27,6 +27,7 @@ before_install:
     - ./setup-ci.sh
 
 script:
+    - export ONCI="1"
     - test -n $CC  && unset CC
     - test -n $CXX && unset CXX
     - cd linux && git checkout master-urus-rpi2 && cd ..
