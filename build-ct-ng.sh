@@ -2,6 +2,8 @@
 
 MAINBUILDROOTDIR=$(pwd)
 
+. /etc/profile.d/urusprofile.sh
+
 cd crosstool-ng
 
 if [ ! -e install ] ; then
@@ -39,7 +41,7 @@ else
     exit 127
 fi
 
-CONFIGS=$(./bin/ct-ng list-samples | cut -c9- | head -n-4 | tail -n+2 | sed '/,\| /!d' | grep -i - -e "$HOST" | grep -i - -e ",.*$TARGET")
+CONFIGS=$(./bin/ct-ng list-samples | cut -c9- | head -n-4 | tail -n+2 | sed '/,\| /!d' | grep -i - -e "^$HOST" | grep -i - -e ",.*$TARGET")
 
 if [ -z "$CONFIGS" ] ; then
     echo "Configuration not found."
