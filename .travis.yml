@@ -21,6 +21,7 @@ addons:
       - gperf
 
 before_install:
+    - ./install_deps.sh
     - ./setup-ci.sh
 
 script:
