@@ -1,5 +1,7 @@
 #!/bin/sh
 
+MAINBUILDROOTDIR=$(pwd)
+
 cd crosstool-ng
 
 if [ ! -e install ] ; then
@@ -37,7 +39,7 @@ else
     exit 127
 fi
 
-CONFIGS=$(./bin/ct-ng list-samples | cut -c9- | head -n-4 | tail -n+2 | sed '/,\| /!d' | grep -i - -e "$HOST" | grep -i - -e ",$TARGET")
+CONFIGS=$(./bin/ct-ng list-samples | cut -c9- | head -n-4 | tail -n+2 | sed '/,\| /!d' | grep -i - -e "$HOST" | grep -i - -e ",$TARGET$")
 
 if [ -z "$CONFIGS" ] ; then
     echo "Configuration not found."
@@ -46,8 +48,14 @@ fi
 PUSHD=$(pwd)
 cnt=0
 cfgs=""
+
+log_build() {
+    echo "[ $(date) ]" " $1: " $2 >> $MAINBUILDROOTDIR/log.txt
+}
+
 for cfgs in $CONFIGS
 do
+    log_build "Building" $CONFIGS
     cd $PUSHD
     cnt=$((cnt+1))
     echo "\n\nCONFIG #$cnt"
@@ -66,6 +74,7 @@ do
     ./bin/ct-ng build
     cd /system/urus/.build
     STRIP=$(find $(pwd) -executable -name "$TARGET*-strip")
+    log_build "Command strip" $STRIP
     printf "\nCurrent folder: %s\n\n" $(pwd)
 
     cd /system/urus/toolchain
