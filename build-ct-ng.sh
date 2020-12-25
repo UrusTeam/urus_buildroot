@@ -73,7 +73,7 @@ do
     -e 's:(CT_LOAD=).*:CT_LOAD="6":;' \
     -e 's:(#.*CT_STRIP_TARGET_TOOLCHAIN_EXECUTABLES).*:CT_STRIP_TARGET_TOOLCHAIN_EXECUTABLES=y:;' .configtmp > .config
 
-    ./bin/ct-ng build
+    ./bin/ct-ng build >> $MAINBUILDROOTDIR/logbuild.txt
     cd /system/urus/.build
     STRIP=$(find $(pwd) -executable -name "$TARGET*-strip")
     log_build "Command strip" $STRIP
@@ -88,13 +88,13 @@ do
         PUSHDTOOL=$(pwd)
         cd $toolfolder
         ls ./bin/*ct-ng.config *.log* 2>/dev/null | xargs rm -f
-        find . | xargs $STRIP -g -S -d --strip-debug --strip-unneeded
+        find . | xargs $STRIP -g -S -d --strip-debug --strip-unneeded >> $MAINBUILDROOTDIR/logbuild.txt
         echo "\ntoolchain striped $STRIP"
         printf "\ncompressing current folder $toolfolder\n"
         echo $cfgs | sed -e 's:,.*::;'
         TARFILENAME=$(printf "$cfgs" | sed -e 's:,.*::;' | xargs printf "HOST-%s-TGT-$(basename $toolfolder)")
         printf "TARFILENAME: %s\n" $TARFILENAME
-        tar -cvJf ../$TARFILENAME.tar.xz .
+        tar -cJf ../$TARFILENAME.tar.xz *
         cd $PUSHDTOOL
         md5sum $TARFILENAME.tar.xz > $TARFILENAME.tar.xz.md5
         mv $toolfolder $TARFILENAME-bak
