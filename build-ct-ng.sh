@@ -2,7 +2,9 @@
 
 MAINBUILDROOTDIR=$(pwd)
 
-. /etc/profile.d/urusprofile.sh
+if [ "x$ONCI" != "x" ] ; then
+    . /etc/profile.d/urusprofile.sh
+fi
 
 cd crosstool-ng
 
