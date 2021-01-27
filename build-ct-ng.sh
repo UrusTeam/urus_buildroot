@@ -94,14 +94,19 @@ fi
     do
         echo $toolfolder
         PUSHDTOOL=$(pwd)
+        TARFILENAME=$(printf "$cfgs" | sed -e 's:,.*::;' | xargs printf "HOST-%s-TGT-$(basename $toolfolder)")
+        cntfl=$(find -name "*.tar.xz" | grep -e $TARFILENAME | wc -l)
         cd $toolfolder
         ls ./bin/*ct-ng.config *.log* 2>/dev/null | xargs rm -f
-        find . | xargs $STRIP -g -S -d --strip-debug --strip-unneeded
+        find . | xargs $STRIP -g -S -d --strip-debug --strip-unneeded 2>/dev/null
         echo "\ntoolchain striped $STRIP"
         printf "\ncompressing current folder $toolfolder\n"
         echo $cfgs | sed -e 's:,.*::;'
-        TARFILENAME=$(printf "$cfgs" | sed -e 's:,.*::;' | xargs printf "HOST-%s-TGT-$(basename $toolfolder)")
-        printf "TARFILENAME: %s\n" $TARFILENAME
+        printf "TARFILENAME after: %s\n" $TARFILENAME
+        if [ $cntfl -gt 0 ] ; then
+            TARFILENAME=$TARFILENAME-$cntfl
+        fi
+        printf "TARFILENAME before: %s\n" $TARFILENAME
         tar -cJf ../$TARFILENAME.tar.xz *
         cd $PUSHDTOOL
         md5sum $TARFILENAME.tar.xz > $TARFILENAME.tar.xz.md5
