@@ -1,0 +1,19 @@
+version pre-msysi686: v1.0.1-pre-win32
+
+ - All: gcc 7.1 version
+
+ - HOST-i686-w64-mingw32-TGT-arm-urus-linux-gnueabihf.tar.xz
+    |-> kernel 4.9.28
+ - HOST-i686-w64-mingw32-TGT-i686-urus-linux-gnu.tar.xz
+    |-> kernel 4.9.28
+
+ - HOST-i686-w64-mingw32-TGT-avr.tar.xz
+    |-> avr size format output
+
+ - HOST-i686-w64-mingw32-TGT-i686-w64-mingw32.tar.xz
+
+ - host-i686-w64-mingw32-wx-3.1.4-msw-urusstudio.tar.xz
+    |-> 20.03 version
+
+ - host-i686-w64-mingw32-wx-3.1.4-msw-urus.tar.xz
+    |-> 3.1.4 version
